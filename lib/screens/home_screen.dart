@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../models/locale_model.dart';
 import '../utils/localizations.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,12 +13,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    AppLocalizations st = AppLocalizations.instance;
+    LocaleModel st = AppLocalizations.instance.value();
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          st.text('good_morning'),
-        ),
+        title: Text(st.welcome ?? ""),
       ),
     );
   }

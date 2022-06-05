@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../models/locale_model.dart';
+
 class AppLocalizations {
   AppLocalizations._init();
 
@@ -11,9 +13,10 @@ class AppLocalizations {
   static AppLocalizations get instance => _instance;
 
   Map<dynamic, dynamic>? _localizedValues;
+  String jsonContent = '';
 
   Future<AppLocalizations> load(Locale locale) async {
-    String jsonContent = await rootBundle
+    jsonContent = await rootBundle
         .loadString("assets/locale/localization_${locale.languageCode}.json");
     _localizedValues = jsonDecode(jsonContent);
     return this;
@@ -21,6 +24,10 @@ class AppLocalizations {
 
   String text(String key) {
     return _localizedValues![key] ?? "$key not found";
+  }
+
+  LocaleModel value() {
+    return LocaleModel.fromJson(jsonDecode(jsonContent));
   }
 }
 
