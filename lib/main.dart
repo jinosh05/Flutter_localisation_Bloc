@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:localization_example/screens/home_screen.dart';
 import 'package:localization_example/utils/localizations.dart';
 
 void main(List<String> args) {
@@ -35,6 +36,7 @@ class _MyAppState extends State<MyApp> {
         }
         return supportedLocales.first;
       },
+      home: const HomeScreen(),
     );
   }
 }
