@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../models/language_model.dart';
 import '../models/locale_model.dart';
 
 class AppLocalizations {
@@ -34,10 +35,12 @@ class AppLocalizations {
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const AppLocalizationsDelegate();
 
-  // Languages supported
   static const List<String> languages = ['en', 'ar'];
   @override
-  bool isSupported(Locale locale) => languages.contains(locale.languageCode);
+  bool isSupported(Locale locale) => Languages.languages
+      .map((e) => e.code)
+      .toList()
+      .contains(locale.languageCode);
 
   @override
   Future<AppLocalizations> load(Locale locale) {
