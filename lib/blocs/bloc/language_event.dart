@@ -4,7 +4,7 @@ part of 'language_bloc.dart';
 abstract class LanguageEvent {}
 
 class ToggleLanguageEvent extends LanguageEvent {
-  final LanguageEvent language;
+  final LanguageEntity language;
 
   ToggleLanguageEvent(this.language);
 }
