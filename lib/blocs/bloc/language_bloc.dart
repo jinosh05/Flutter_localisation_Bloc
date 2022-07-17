@@ -9,11 +9,11 @@ part 'language_event.dart';
 part 'language_state.dart';
 
 class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
-  LanguageBloc() : super(LanguageLoaded(Locale(Languages.languages[0].code)));
+  LanguageBloc() : super(LanguageLoaded(Locale(Languages.languages[0].code))) {
+    on<ToggleLanguageEvent>(_toggleLanguage);
+  }
 
-  Stream<LanguageState> mapEventToState(LanguageEvent event) async* {
-    if (event is ToggleLanguageEvent) {
-      yield LanguageLoaded(Locale(event.language.code));
-    }
+  _toggleLanguage(ToggleLanguageEvent event, Emitter<LanguageState> emit) {
+    emit(LanguageLoaded(Locale(event.language.code)));
   }
 }

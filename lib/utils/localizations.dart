@@ -7,11 +7,16 @@ import '../models/language_model.dart';
 import '../models/locale_model.dart';
 
 class AppLocalizations {
-  AppLocalizations._init();
+  final Locale locale;
 
-  static final AppLocalizations _instance = AppLocalizations._init();
+  AppLocalizations(this.locale);
 
-  static AppLocalizations get instance => _instance;
+  static AppLocalizations? of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  }
+
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      AppLocalizationsDelegate();
 
   Map<dynamic, dynamic>? _localizedValues;
   String jsonContent = '';
@@ -20,6 +25,7 @@ class AppLocalizations {
     jsonContent = await rootBundle
         .loadString("assets/locale/localization_${locale.languageCode}.json");
     _localizedValues = jsonDecode(jsonContent);
+
     return this;
   }
 
@@ -35,7 +41,7 @@ class AppLocalizations {
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const AppLocalizationsDelegate();
 
-  static const List<String> languages = ['en', 'ar'];
+  // static const List<String> languages = ['en', 'ar'];
   @override
   bool isSupported(Locale locale) => Languages.languages
       .map((e) => e.code)
@@ -43,11 +49,12 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
       .contains(locale.languageCode);
 
   @override
-  Future<AppLocalizations> load(Locale locale) {
-    return AppLocalizations.instance.load(locale);
+  Future<AppLocalizations> load(Locale locale) async {
+    AppLocalizations appLocalizations = AppLocalizations(locale);
+    await appLocalizations.load(locale);
+    return appLocalizations;
   }
 
   @override
-  bool shouldReload(covariant LocalizationsDelegate<AppLocalizations> old) =>
-      true;
+  bool shouldReload(LocalizationsDelegate<AppLocalizations> old) => true;
 }

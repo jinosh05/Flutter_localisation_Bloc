@@ -2,11 +2,10 @@ part of 'language_bloc.dart';
 
 @immutable
 abstract class LanguageState {
-  const LanguageState();
+  final Locale locale;
+  const LanguageState(this.locale);
 }
 
 class LanguageLoaded extends LanguageState {
-  final Locale locale;
-
-  const LanguageLoaded(this.locale);
+  const LanguageLoaded(super.locale);
 }
