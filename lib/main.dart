@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localization_example/screens/home_screen.dart';
 import 'package:localization_example/utils/localizations.dart';
-// import 'package:localization_example/utils/Localization/app_localizations_delegate.dart';
-
 import 'blocs/bloc/language_bloc.dart';
 
 void main(List<String> args) {
@@ -24,14 +22,18 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        //
+        //  Language Bloc
+        //
         BlocProvider(
           create: (context) => LanguageBloc(),
         )
       ],
-      // create: (context) => LanguageBloc(),
       child: BlocBuilder<LanguageBloc, LanguageState>(
+        // Condition for rebuilding of the widgets
         buildWhen: (previousState, currentState) =>
             previousState != currentState,
+
         builder: (_, state) {
           return MaterialApp(
             localizationsDelegates: const [
@@ -40,7 +42,7 @@ class _MyAppState extends State<MyApp> {
               GlobalCupertinoLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
             ],
-            supportedLocales: const [Locale('en', ''), Locale('ar', '')],
+            supportedLocales: const [Locale('en', 'IN'), Locale('ar', "AE")],
             localeResolutionCallback:
                 (Locale? locale, Iterable<Locale> supportedLocales) {
               for (Locale supportedLocale in supportedLocales) {

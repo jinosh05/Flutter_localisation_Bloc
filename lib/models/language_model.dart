@@ -13,7 +13,7 @@ class Languages {
 
   // Languages supported
   static const languages = [
-    LanguageEntity(code: 'en', value: 'English'),
-    LanguageEntity(code: 'ar', value: 'Arabic'),
+    LanguageEntity(code: 'en', value: 'IN'),
+    LanguageEntity(code: 'ar', value: 'AE'),
   ];
 }

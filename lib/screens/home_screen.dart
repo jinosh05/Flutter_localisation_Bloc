@@ -15,11 +15,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    // Use this model to get the List of all supported words
     LocaleModel st = AppLocalizations.of(context)!.value();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          //AppLocalizations.of(context)!.text('welcome')
+          // Using LocaleModel here
           st.goodMorning ?? "",
         ),
       ),
@@ -28,7 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
+              //
+              // Directly calling Value using key
               AppLocalizations.of(context)!.text('welcome'),
+
               style: const TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 20,
@@ -43,13 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context1, state) {
                   return TextButton(
                       onPressed: () {
+                        // Calling Toggle Function from here
                         context.read<LanguageBloc>().add(
                             ToggleLanguageEvent(Languages.languages[index]));
-                        debugPrint(context
-                            .read<LanguageBloc>()
-                            .state
-                            .locale
-                            .languageCode);
                       },
                       child: Text(Languages.languages[index].value));
                 },
