@@ -2,7 +2,7 @@ part of 'language_bloc.dart';
 
 @immutable
 abstract class LanguageState {
-  final Locale locale;
+  final LanguageEntity locale;
   const LanguageState(this.locale);
 }
 

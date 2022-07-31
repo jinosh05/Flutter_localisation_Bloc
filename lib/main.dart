@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
               }
               return supportedLocales.first;
             },
-            locale: state.locale,
+            locale: Locale(state.locale.code, state.locale.value),
             home: const HomeScreen(),
           );
         },
